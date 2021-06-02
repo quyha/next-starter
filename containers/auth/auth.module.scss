@@ -1,0 +1,8 @@
+@import '@styles/functions.scss';
+
+.login {
+    &-wrapper {
+        width: pxToRem(400);
+        margin: 60px auto;
+    }
+}

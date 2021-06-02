@@ -1,0 +1,33 @@
+@import 'mixins';
+
+$font-size-h1: 2.25rem !default;
+$font-size-h2: 1.875rem !default;
+$font-size-h3: 1.5rem !default;
+$font-size-h4: 1.125rem !default;
+$font-size-h5: .875rem !default;
+$font-size-h6: .75rem !default;
+
+// name | font-size | letter-spacing | font-weight
+$typos : (
+    h1 $font-size-h1 0.4px 700,
+    h2 $font-size-h2 0.38px 600,
+    h3 $font-size-h3 0.36px 400,
+    h4 $font-size-h4 0.34px unset,
+    h5 $font-size-h5 0.32px unset,
+    h6 $font-size-h6 0.32px unset,
+);
+
+@each $name, $font-size, $letter-spacing, $font-weight in $typos {
+    #{$name} {
+        font-size: $font-size;
+        font-weight: $font-weight;
+        letter-spacing: $letter-spacing;
+        line-height: 1.5;
+        margin: 0 0 5px;
+
+        @include breakpoint(mobile) {
+            font-size: $font-size * .8;
+            letter-spacing: 0;
+        }
+    }
+}

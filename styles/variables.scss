@@ -1,0 +1,53 @@
+$color-primary: #3B64B5 !default;
+$color-secondary: #0D2F72 !default;
+$color-tertiary: #EBB763 !default;
+$color-text-primary: #3C4356 !default;
+$color-text-secondary: #4F566B !default;
+$color-text-tertiary: #A3ACB8 !default;
+$color-bg: #FFFFFF !default;
+$color-white: #FFFFFF !default;
+$color-gray: #A3ACB8 !default;
+$color-gray-light: #BDBDBD !default;
+$color-gray-lighter: #F7FAFC !default;
+$color-black: #2A2F44 !default;
+$color-black-lighter: #4F566B !default;
+$color-info: #3298DC !default;
+$color-success: #48C774 !default;
+$color-warning: #EBB763 !default;
+$color-danger: #FF0074 !default;
+$color-dark: #555555 !default;
+
+$border-radius-base: 4px !default;
+$border-radius-small: 2px !default;
+$border-radius-huge: 6px !default;
+$border-radius-extreme: 30px !default;
+$border-radius-rounded: 290486px !default;
+
+$font-size-base: 1rem !default;
+$font-size-medium: 1.25rem !default;
+$font-size-large: 1.5rem !default;
+$font-size-small: .875rem !default;
+
+$input-padding-left: .75rem;
+
+/* SHADOWS */
+$shadow-key-umbra-opacity: 0.2 !default;
+$shadow-key-penumbra-opacity: 0.14 !default;
+$shadow-ambient-shadow-opacity: 0.12 !default;
+
+/* ANIMATION */
+$animation-curve-fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$animation-curve-linear-out-slow-in: cubic-bezier(0, 0, 0.2, 1) !default;
+$animation-curve-fast-out-linear-in: cubic-bezier(0.4, 0, 1, 1) !default;
+$animation-curve-default: $animation-curve-fast-out-slow-in !default;
+
+$layout-padding-horizontal: 3% !default;
+$layout-padding-horizontal-mobile: 10px !default;
+$layout-padding-horizontal-desktop-down: 40px !default;
+$container-max-width: 1920px !default;
+
+$container-padding-horizontal: 80px !default;
+
+$header-height: 72px !default;
+$sidebar-width: 250px !default;
+$sidebar-mini-width: 80px !default;

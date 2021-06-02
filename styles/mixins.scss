@@ -1,0 +1,378 @@
+$breakpoint-desktop-up: 960px;
+$breakpoint-large-desktop: 1441px;
+$breakpoint-small-tablet: 768px;
+$breakpoint-large-tablet: 1024px;
+$breakpoint-mobile: 640px;
+$breakpoint-mobile-landscape: 480px;
+
+@mixin breakpoint($media) {
+    @if $media == large-desktop {
+        @media only screen and (min-width: $breakpoint-large-desktop) { @content; }
+    }
+  
+    @if $media == desktop-up {
+        @media only screen and (min-width: $breakpoint-desktop-up) { @content; }
+    }
+  
+    @if $media == desktop-down {
+        @media only screen and (max-width: calc(#{$breakpoint-desktop-up} - 1px)) { @content; }
+    }
+
+    @if $media == large-tablet-down {
+        @media only screen and (max-width: $breakpoint-large-tablet) { @content; }
+    }
+
+    @if $media == large-tablet-up {
+        @media only screen and (min-width: calc(#{$breakpoint-large-tablet} + 1px)) { @content; }
+    }
+
+    @if $media == tablet-up {
+        @media screen and (min-width: calc(#{$breakpoint-small-tablet} + 1px)) { @content; }
+    }
+    
+    @if $media == tablet-down {
+        @media only screen and (max-width: $breakpoint-small-tablet) { @content; }
+    }
+    
+    @if $media == tablet-landscape {
+        @media only screen  and (min-device-width : $breakpoint-small-tablet)
+        and (max-device-width : $breakpoint-large-tablet)
+        and (orientation : landscape){ @content; }
+    }
+  
+    @if $media == mobile {
+        @media only screen and (max-width: $breakpoint-mobile) { @content; }
+    }
+    
+    @if $media == mobile-portrait {
+        @media only screen  and (max-width: $breakpoint-mobile)
+        and (orientation : portrait) { @content; }
+    }
+    
+    @if $media == mobile-landscape {
+        @media only screen  and (min-width: 320px)
+        and (max-width: $breakpoint-mobile-landscape)
+        and (orientation : landscape) { @content; }
+    }
+    
+    @if $media == retina {
+        @media (-webkit-min-device-pixel-ratio: 2) { @content; }
+    }
+    
+    @if $media == iphone5 {
+        @media only screen and (device-aspect-ratio: 40/71) { @content }
+    }
+}
+
+@mixin box-shadow($content, $inset: false) {
+    @if $inset {
+        -webkit-box-shadow:inset $content;
+        -moz-box-shadow:inset $content;
+        box-shadow:inset $content;
+    } @else {
+        -webkit-box-shadow: $content;
+        -moz-box-shadow: $content;
+        box-shadow: $content;
+    }
+}
+
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
+
+@mixin transform-origin($content) {
+    -moz-transform-origin: $content;
+    -o-transform-origin: $content;
+    -ms-transform-origin: $content;
+    -webkit-transform-origin: $content;
+    transform-origin: $content;
+}
+
+@mixin transition($transitions){
+    -webkit-transition: $transitions;
+    -moz-transition: $transitions;
+    -o-transition: $transitions;
+    -ms-transition: $transitions;
+    transition: $transitions;
+}
+
+@mixin transition-duration($time) {
+    -webkit-transition-duration: $time;
+    -moz-transition-duration: $time;
+    -o-transition-duration: $time;
+    -ms-transition-duration: $time;
+    transition-duration: $time;
+}
+
+@mixin animation($value){
+    -webkit-animation: $value;
+    -moz-animation: $value;
+    -o-animation: $value;
+    -ms-animation: $value;
+    animation: $value;
+}
+
+@mixin animation-delay($time) {
+    -webkit-animation-delay: $time;
+    -moz-animation-delay: $time;
+    -o-animation-delay: $time;
+    -ms-animation-delay: $time;
+    animation-delay: $time;
+}
+
+@mixin placeholder {
+    &.placeholder { @content; }
+    &:-moz-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &:-ms-input-placeholder { @content; }
+    &::-webkit-input-placeholder { @content; }
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin button-shadow-color($color){
+    box-shadow: 0 14px 26px -12px rgba($color, $shadow-key-penumbra-opacity * 3),
+    0  4px 23px 0px rgba(0,0,0, $shadow-ambient-shadow-opacity),
+    0  8px 10px -5px rgba($color, $shadow-key-umbra-opacity);
+}
+
+@mixin shadow-2dp-color($color){
+    box-shadow: 0 2px 2px 0 rgba($color, $shadow-key-penumbra-opacity),
+    0 3px 1px -2px rgba($color, $shadow-key-umbra-opacity),
+    0 1px 5px 0 rgba($color, $shadow-ambient-shadow-opacity);
+}
+
+@mixin btn-styles($btn-color, $has-shadow: true) {
+  //@include shadow-2dp-color($btn-color);
+    @if($has-shadow) { box-shadow: 0 4px 10px 0 rgba(0,0,0,0.25); }
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    &:active:focus,
+    &:active:hover,
+    &.active:focus,
+    &.active:hover,
+    .open > &.dropdown-toggle,
+    .open > &.dropdown-toggle:focus,
+    .open > &.dropdown-toggle:hover {
+        background-color: $btn-color;
+        color: $color-white;
+    }
+
+    &:focus,
+    &:active,
+    &:hover{
+        @include button-shadow-color($btn-color);
+    }
+
+    &.disabled,
+    &:disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        &,
+        &:hover,
+        &:focus,
+        &.focus,
+        &:active,
+        &.active {
+        box-shadow: none;
+        }
+    }
+
+    &.btn-simple{
+        background-color: transparent;
+        color: $btn-color;
+        box-shadow: none;
+
+        &:hover,
+        &:focus,
+        &:active{
+        background-color: transparent;
+        color: $btn-color;
+        }
+    }
+}
+
+@mixin image-size($width: auto, $height: auto) {
+    width: $width;
+    max-height: $height;
+}
+
+@mixin aspect-ratio($width, $height, $class-inner-box: '') {
+    position: relative;
+    &:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+    @if $class-inner-box != '' {
+        > #{$class-inner-box} {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        }
+    }
+}
+
+@mixin columns($columns, $columnGap) {
+    -webkit-columns: $columns;
+    -moz-columns: $columns;
+    columns: $columns;
+    -webkit-column-gap: $columnGap;
+    -moz-column-gap: $columnGap;
+    column-gap: $columnGap;
+}
+
+@mixin full-background-color-width-container($bg, $zIndex: -1, $top: 0) {
+    position: absolute;
+    content: '';
+    top: $top;
+    bottom: 0;
+    right: -999px;
+    left: -999px;
+    background-color: $bg;
+    z-index: $zIndex;
+}
+
+@mixin box-sizing($type) {
+    -webkit-box-sizing:$type;
+    -moz-box-sizing:$type;
+    box-sizing:$type;
+}
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    filter: alpha(opacity=($opacity * 100));
+}
+
+@mixin column-width ( $value: 150px ) {
+    -webkit-column-width: $value;
+    -moz-column-width: $value;
+    column-width: $value;
+}
+
+@mixin flexbox() {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin flex($values) {
+    -webkit-box-flex: $values;
+    -moz-box-flex: $values;
+    -webkit-flex: $values;
+    -ms-flex: $values;
+    flex: $values;
+}
+
+@mixin flex-direction($direction) {
+    -webkit-flex-direction: $direction;
+    -moz-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+    flex-direction: $direction;
+}
+
+@mixin flex-wrap($wrap) {
+    -webkit-flex-wrap: $wrap;
+    -moz-flex-wrap: $wrap;
+    -ms-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+}
+
+@mixin flex-flow($flow) {
+    -webkit-flex-flow: $flow;
+    -moz-flex-flow: $flow;
+    -ms-flex-flow: $flow;
+    flex-flow: $flow;
+}
+
+@mixin order($val) {
+    -webkit-box-ordinal-group: $val;
+    -moz-box-ordinal-group: $val;
+    -ms-flex-order: $val;
+    -webkit-order: $val;
+    order: $val;
+}
+
+@mixin flex-grow($grow) {
+    -webkit-flex-grow: $grow;
+    -moz-flex-grow: $grow;
+    -ms-flex-grow: $grow;
+    flex-grow: $grow;
+}
+
+@mixin flex-shrink($shrink) {
+    -webkit-flex-shrink: $shrink;
+    -moz-flex-shrink: $shrink;
+    -ms-flex-shrink: $shrink;
+    flex-shrink: $shrink;
+}
+
+@mixin flex-basis($width) {
+    -webkit-flex-basis: $width;
+    -moz-flex-basis: $width;
+    -ms-flex-basis: $width;
+    flex-basis: $width;
+}
+
+@mixin justify-content($justify) {
+    -webkit-justify-content: $justify;
+    -moz-justify-content: $justify;
+    -ms-justify-content: $justify;
+    justify-content: $justify;
+    -ms-flex-pack: $justify;
+}
+
+@mixin align-content($align) {
+    -webkit-align-content: $align;
+    -moz-align-content: $align;
+    -ms-align-content: $align;
+    align-content: $align;
+}
+
+@mixin align-items($align) {
+    -webkit-align-items: $align;
+    -moz-align-items: $align;
+    -ms-align-items: $align;
+    -ms-flex-align: $align;
+    align-items: $align;
+}
+
+@mixin align-self($align) {
+    -webkit-align-self: $align;
+    -moz-align-self: $align;
+    -ms-align-self: $align;
+    align-self: $align;
+}
+
+@mixin hover-link() {
+    @media (pointer: fine) {
+        &:hover {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,72 @@
+@import 'variables';
+@import 'mixins';
+
+* {
+    @include box-sizing(border-box);
+}
+
+html {
+    font-size: 1rem;
+    scroll-behavior: smooth;
+
+    @include breakpoint(mobile) {
+        font-size: 14px;
+    }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: $color-white;
+    font-size: $font-size-base;
+    color: $color-text-primary;
+    line-height: 1.5;
+}
+
+main {
+    position: relative;
+    overflow-x: hidden;
+}
+
+article + article, aside + aside {
+    margin-top: 15px;
+}
+// Prevent highlight on mobile
+* {
+    -webkit-tap-highlight-color: transparent;
+    &:focus {
+        outline: 0;
+    }
+}
+
+a:focus, a:active,
+button:active, button:focus, button:hover,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+    outline : 0 !important;
+}
+
+a {
+    text-decoration: none;
+    color: $color-primary;
+
+    &:hover {
+        color: $color-text-primary;
+    }
+
+    &:active {
+        color: $color-primary;
+    }
+}
+
+img {
+    vertical-align: middle;
+}
+
+[class^="raphael-group-"][class$="-creditgroup"] text {
+    display: none;
+}

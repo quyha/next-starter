@@ -1,0 +1,247 @@
+@import '@styles/variables.scss';
+@import '@styles/mixins.scss';
+@import '@styles/inheritance.scss';
+
+$color-input-shadow: hsl(0, 0%, 4%) !default;
+
+$input-color: $color-text-primary !default;
+$input-background-color: hsl(0, 0%, 100%) !default;
+$input-border-color: hsl(0, 0%, 86%) !default;
+$input-height: 2.875em !default;
+$input-shadow: inset 0 1px 2px rgba($color-input-shadow, 0.1) !default;
+$input-placeholder-color: rgba($input-color, 0.3) !default;
+
+$input-hover-color: hsl(0, 0%, 21%) !default;
+$input-hover-border-color: hsl(0, 0%, 48%) !default;
+
+$input-focus-color: hsl(0, 0%, 21%) !default;
+$input-focus-border-color: $color-primary !default;
+$input-focus-box-shadow-size: 0 0 0 0.125em !default;
+$input-focus-box-shadow-color: rgba($color-primary, 0.25) !default;
+
+$input-disabled-color: hsl(0, 0%, 48%) !default;
+$input-disabled-background-color: hsl(0, 0%, 96%) !default;
+$input-disabled-border-color: hsl(0, 0%, 96%) !default;
+$input-disabled-placeholder-color: rgba($input-disabled-color, 0.3) !default;
+
+$input-arrow: $color-primary !default;
+
+$input-icon-color: hsl(0, 0%, 86%) !default;
+$input-icon-active-color: hsl(0, 0%, 48%) !default;
+
+$input-radius: 4px !default;
+
+$input-size-small: .75rem !default;
+$input-size-medium: 1.25rem !default;
+$input-size-large: 1.5rem !default;
+
+$label-color: hsl(0, 0%, 21%) !default;
+$label-weight: 600 !default;
+
+$appearances: (
+    'primary': $color-primary,
+    'info': $color-info,
+    'success': $color-success,
+    'warning': $color-warning,
+    'danger': $color-danger
+);
+
+.field {
+    &.is-small {
+        font-size: $input-size-small;
+    }
+
+    &.is-medium {
+        font-size: $input-size-medium;
+    }
+
+    &.is-large {
+        font-size: $input-size-large;
+    }
+    
+    &:not(:last-child) {
+        margin-bottom: 1.2rem;
+    }
+
+    &.is-horizontal {
+        @include breakpoint(desktop-up) {
+            @include flexbox();
+        }
+    }
+
+    &-label {
+        margin-bottom: .5rem;
+        
+        @include breakpoint(desktop-up) {
+            @include flex-basis(0);
+            @include flex-grow(1);
+            @include flex-shrink(0);
+            margin-right: 1.5rem;
+            text-align: right;
+            padding-top: .5rem;
+        }
+    }
+
+    &-body {
+        @include breakpoint(desktop-up) {
+            @include flexbox();
+            @include flex-basis(0);
+            @include flex-grow(5);
+            @include flex-shrink(1);
+            
+            .field {
+                margin-bottom: 0;
+            }
+
+            & > .field {
+                @include flex-shrink(1);
+
+                &:not(.is-narrow) {
+                    @include flex-grow(1);
+                }
+
+                &:not(:last-child) {
+                    margin-right: .75rem;
+                }
+            }
+        }
+    }
+
+    .control {
+        position: relative;
+
+        &.is-loading {
+            &::after {
+                @extend %loading;
+                right: $control-padding-horizontal;
+                left: unset;
+                border-bottom-color: $input-placeholder-color;
+                border-left-color: $input-placeholder-color;
+            }
+        }
+
+        &.has-icon-left, &.has-icon-right {
+            .icon-ip {
+                color: $input-icon-color;
+                height: $input-height;
+                pointer-events: none;
+                position: absolute;
+                top: 0;
+                width: $input-height;
+                z-index: 4;
+                text-align: center;
+
+                .icon {
+                    width: 1.5em;
+                    height: 100%;
+                }
+            }
+
+            .input {
+                &:focus, :active {
+                    & ~ .icon-ip {
+                        color: $input-icon-active-color;
+                    }
+                }
+            }
+        }
+
+        &.has-icon-left {
+            .input {
+                padding-left: $input-height;
+            }
+
+            .icon-ip.is-left {
+                left: 0;
+            }
+        }
+
+        &.has-icon-right {
+            .input {
+                padding-right: $input-height;
+            }
+
+            .icon-ip.is-right {
+                right: 0;
+            }
+        }
+    }
+    
+    .input, .textarea {
+        background-color: $input-background-color;
+        border-color: $input-border-color;
+        border-radius: $input-radius;
+        color: $input-color;
+        width: 100%;
+        @extend %control;
+    
+        @include placeholder {
+            color: $input-placeholder-color;
+        }
+    
+        &:hover {
+            border-color: $input-hover-border-color;
+        }
+    
+        &:focus, &:active {
+            border-color: $input-focus-border-color;
+            @include box-shadow($input-focus-box-shadow-size $input-focus-box-shadow-color);
+        }
+    
+        &:disabled, fieldset[disabled] {
+            background-color: $input-disabled-background-color;
+            border-color: $input-disabled-border-color;
+            box-shadow: none;
+            color: $input-disabled-color;
+    
+            @include placeholder {
+                color: $input-disabled-placeholder-color;
+            }
+        }
+    
+        @each $appearance, $color in $appearances {
+            &.is-#{$appearance} {
+                border-color: $color;
+    
+                &:focus, &:active {
+                    @include box-shadow($input-focus-box-shadow-size rgba($color, 0.25));
+                }
+            }
+        }
+
+        &.is-rounded {
+            border-radius: 99999px;
+        }
+    }
+}
+
+.label {
+    color: $label-color;
+    display: block;
+    font-weight: $label-weight;
+
+    &:not(:last-child) {
+        margin-bottom: .5em;
+    }
+}
+
+.textarea {
+    display: block;
+    max-width: 100%;
+    min-width: 100%;
+    resize: vertical;
+    @extend %control;
+
+    &:not([rows]) {
+        max-height: 600px;
+        min-height: 120px;
+    }
+
+    &[rows] {
+        height: initial;
+    }
+
+    &.has-fixed-size {
+        resize: none;
+    }
+}

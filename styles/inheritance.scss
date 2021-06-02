@@ -1,0 +1,84 @@
+@import 'variables';
+@import 'mixins';
+
+$control-radius: 4px !default;
+$control-radius-small: 2px !default;
+
+$control-border-width: 1px !default;
+
+$control-height: 2.875em !default;
+$control-line-height: 1.5 !default;
+
+$control-padding-vertical: calc(0.575em - #{$control-border-width}) !default;
+$control-padding-horizontal: calc(0.875em - #{$control-border-width}) !default;
+
+%control {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    @include align-items(center);
+    border: $control-border-width solid transparent;
+    border-radius: $control-radius;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1em;
+    height: $control-height;
+    justify-content: flex-start;
+    line-height: $control-line-height;
+    padding-bottom: $control-padding-vertical;
+    padding-left: $control-padding-horizontal;
+    padding-right: $control-padding-horizontal;
+    padding-top: $control-padding-vertical;
+    position: relative;
+    vertical-align: top;
+
+    &:focus, &.is-focused, &:active, &.is-active {
+        outline: none;
+    }
+    
+    &[disabled], fieldset[disabled] {
+        cursor: not-allowed;
+    }
+}
+
+%loading {
+    position: absolute !important;
+    border: 2px solid $color-gray;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: "";
+    display: block;
+    height: 1em;
+    width: 1em;
+    @include animation(spinAround 500ms infinite linear);
+    left: calc(50% - (1em / 2));
+    top: calc(50% - (1em / 2));
+    @include box-sizing(border-box);
+}
+
+%delete {
+    user-select: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    outline: none;
+    position: relative;
+    vertical-align: top;
+    @include flex-grow(0);
+    @include flex-shrink(0);
+}
+
+@include keyframes(spinAround) {
+    from {
+        @include transform(rotate(0deg));
+    }
+    to {
+        @include transform(rotate(359deg));
+    }
+}

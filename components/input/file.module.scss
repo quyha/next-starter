@@ -1,0 +1,156 @@
+@import '@styles/variables.scss';
+@import '@styles/mixins.scss';
+@import '@styles/inheritance.scss';
+
+$file-border-color: hsl(0, 0%, 86%) !default;
+$file-radius: 4px !default;
+
+$file-cta-background-color: hsl(0, 0%, 96%) !default;
+$file-cta-color: hsl(0, 0%, 29%) !default;
+$file-cta-hover-color: hsl(0, 0%, 21%) !default;
+$file-cta-active-color: hsl(0, 0%, 21%) !default;
+
+$file-name-border-color: hsl(0, 0%, 86%) !default;
+$file-name-border-style: solid !default;
+$file-name-border-width: 1px 1px 1px 0 !default;
+$file-name-max-width: 16em !default;
+
+.file {
+    @include flexbox();
+    @include align-items(stretch);
+    @include justify-content(flex-start);
+    position: relative;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &.has-name {
+        .file-cta {
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .file-name {
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+
+        &.is-empty {
+            .file-cta {
+                border-radius: $file-radius;
+            }
+
+            .file-name {
+                display: none;
+            }
+        }
+    }
+
+    &-label {
+        @include flexbox();
+        @include align-items(stretch);
+        @include justify-content(flex-start);
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+
+        &:hover {
+            .file-cta {
+                background-color: darken($file-cta-background-color, 2.5%);
+                color: $file-cta-hover-color;
+            }
+
+            .file-name {
+                border-color: darken($file-name-border-color, 2.5%);
+            }
+        }
+
+        &:active {
+            .file-cta {
+                background-color: darken($file-cta-background-color, 5%);
+                color: $file-cta-active-color;
+            }
+
+            .file-name {
+                border-color: darken($file-name-border-color, 5%)
+            }
+        }
+    }
+
+    &-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: 0;
+        opacity: 0;
+    }
+
+    &-cta, &-name {
+        @extend %control;
+        border-color: $file-border-color;
+        border-radius: $file-radius;
+        font-size: 1em;
+        padding-left: 1em;
+        padding-right: 1em;
+        white-space: nowrap;
+    }
+
+    &-cta {
+        background-color: $file-cta-background-color;
+        color: $file-cta-color;
+    }
+
+    &-name {
+        border-color: $file-name-border-color;
+        border-style: $file-name-border-style;
+        border-width: $file-name-border-width;
+        display: block;
+        max-width: $file-name-max-width;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+    }
+
+    &-icon {
+        @include flexbox();
+        @include align-items(center);
+        @include justify-content(center);
+        width: 1.15em;
+        height: 1.15em;
+        margin-right: .5em;
+        color: $file-cta-color;
+    }
+
+    &.is-center {
+        @include justify-content(center);
+    }
+
+    &.is-right {
+        @include justify-content(flex-end);
+    }
+
+    &.is-fullwidth {
+        .file-label {
+            width: 100%;
+        }
+
+        .file-name {
+            @include flex-grow(1);
+            max-width: none;
+        }
+    }
+
+    & + .help {
+        margin-bottom: 15px;
+    }
+
+    & + .image {
+        margin-top: 15px;
+    }
+}

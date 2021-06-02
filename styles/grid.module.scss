@@ -1,0 +1,110 @@
+@import 'mixins';
+
+.col {
+    display: grid;
+    grid-auto-rows: minmax(150px, auto);
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
+    justify-content: center;
+
+    &--2 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &--10 {
+        grid-template-columns: repeat(10, 1fr);
+    }
+
+    &--12 {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    &__span-2 {
+        grid-column: span 2;
+    }
+
+    &__span-3 {
+        grid-column: span 3;
+    }
+
+    &__span-4 {
+        grid-column: span 4;
+    }
+
+    &__span-5 {
+        grid-column: span 5;
+    }
+
+    &__span-6 {
+        grid-column: span 6;
+    }
+
+    &__span-7 {
+        grid-column: span 7;
+    }
+
+    &__span-8 {
+        grid-column: span 8;
+    }
+
+    &__span-9 {
+        grid-column: span 9;
+    }
+}
+
+@include breakpoint(desktop-down) {
+    [class*="col__span-"] {
+        grid-column: unset;
+    }
+
+    [class*="col--"] {
+        grid-template-columns: 1fr;
+    }
+}
+
+.grid {
+    &-align-end-right {
+        justify-self: end;
+        align-self: end;
+    }
+
+    &-align-middle {
+        justify-self: center;
+        align-self: center;
+    }
+}
+
+.align {
+    @include flexbox();
+    
+    &-center {
+        @include justify-content(center);
+    }
+
+    &-end-right {
+        @include justify-content(flex-end);
+        @include align-content(flex-end);
+    }
+
+    &-end-center {
+        @include justify-content(center);
+        @include align-items(flex-end);
+    }
+
+    &-middle {
+        @include justify-content(center);
+        @include align-items(center);
+    }
+
+    &-space-between {
+        @include justify-content(space-between);
+    };
+
+    &-items-center {
+        @include align-items(center)
+    }
+
+    &-end {
+        @include align-items(flex-end);
+    }
+}
